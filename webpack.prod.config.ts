@@ -24,6 +24,10 @@ const config: Configuration = {
             presets: ["@babel/preset-env", "@babel/preset-react", "@babel/preset-typescript"]
           }
         }
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader", "postcss-loader"]
       }
     ]
   },
