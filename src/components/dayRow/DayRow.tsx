@@ -1,4 +1,5 @@
 import React from "react";
+import DayCell from "../dayCell/DayCell";
 
 interface Props {
   data: any;
@@ -15,9 +16,7 @@ const DayRow = ({ data: { id, name, cols } }: Props) => {
       </div>
       <div className="flex jusitfy-between w-[100%]">
         {cols.map((item: any, index: number) => (
-          <div key={index} className={`bg-slate-300 w-[10%] flex border-r-[1px] border-b-[1px] border-slate-300 items-center justify-center ${id % 2 === 0 ? "bg-slate-100" : "bg-slate-200"}`}>
-            {item.id}
-          </div>
+          <DayCell key={index} id={id} data={item} />
         ))}
       </div>
     </div>
