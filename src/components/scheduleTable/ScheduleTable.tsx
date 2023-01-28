@@ -1,11 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import DayRow from "../dayRow/DayRow";
-import { DataContext } from "../../context/DataContext";
+import { GlobalContext } from "../../context/GlobalState";
+import { getAttachedSubject } from "../../actions/globalActions";
 
 const ScheduleTable = () => {
-  const data = useContext(DataContext);
+  const {
+    state: { weekdays, attachedSubjects },
+    dispatch
+  } = useContext(GlobalContext);
 
   const timeCols = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }, { id: 7 }, { id: 8 }, { id: 9 }, { id: 10 }];
+
+  useEffect(() => {
+    dispatch(getAttachedSubject());
+    console.log(attachedSubjects);
+  }, []);
 
   return (
     <div className="w-[90%] h-[80vh] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex flex-col">
@@ -19,7 +28,7 @@ const ScheduleTable = () => {
         </div>
       </div>
       <div className="w-[100%] h-[100%]">
-        {data?.weekdays.map((item: any, index: number) => {
+        {weekdays.map((item: any, index: number) => {
           return <DayRow key={index} data={item} />;
         })}
       </div>

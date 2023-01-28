@@ -1,23 +1,30 @@
-import React from "react";
+import React, { createContext, useReducer } from "react";
+import appReducer from "./AppReducer";
+import { IContextModel, IState } from "../interface/index";
 
 interface Props {
   children: JSX.Element;
 }
 
-type day = {
-  id: number;
-  name: string;
-  cols: any[];
-};
-
-interface weekdaysType {
-  weekdays: day[];
-}
-
-export const DataContext = React.createContext<weekdaysType | null>(null);
-
-const DataProvider = ({ children }: Props) => {
-  const [weekdays, setWeekdays] = React.useState([
+const initialState = {
+  teachers: [
+    {
+      id: "1248y",
+      firstname: "Sammy",
+      lastname: "Rogue"
+    }
+  ],
+  subjects: [
+    { id: "ek01", name: "Elektrotechnika", slug: "EK" },
+    { id: "mat07", name: "Matematika", slug: "MAT" }
+  ],
+  attachedSubjects: [
+    { subjectID: "ek01", teacherID: "1248y", position: { weekday: 2, col: 3 }, room: "NB101" },
+    { subjectID: "ek01", teacherID: "1248y", position: { weekday: 1, col: 6 }, room: "NB210" }
+  ],
+  subjectDetail: null,
+  isModalOpen: false,
+  weekdays: [
     {
       id: 1,
       name: "Pondělí",
@@ -98,9 +105,22 @@ const DataProvider = ({ children }: Props) => {
         { id: 10, items: [] }
       ]
     }
-  ]);
+  ]
+} as IState;
 
-  return <DataContext.Provider value={{ weekdays }}>{children}</DataContext.Provider>;
+export const GlobalContext = createContext({} as IContextModel);
+
+export const GlobalProvider = ({ children }: Props) => {
+  const [state, dispatch] = useReducer(appReducer, initialState);
+
+  return (
+    <GlobalContext.Provider
+      value={{
+        state: state,
+        dispatch
+      }}
+    >
+      {children}
+    </GlobalContext.Provider>
+  );
 };
-
-export default DataProvider;
