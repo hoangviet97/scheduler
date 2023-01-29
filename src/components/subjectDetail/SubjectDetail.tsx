@@ -1,17 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../context/GlobalState";
 import Select from "react-select";
-import { deleteAttachedSubject } from "../../actions/globalActions";
+import { deleteAttachedSubject, addAttachedSubject } from "../../actions/globalActions";
+import { v4 as uuidv4 } from "uuid";
+
 const SubjectDetail = () => {
   const {
-    state: { singleSubject, teachers, subjects },
+    state: { singleSubject, teachers, subjects, position },
     dispatch
   } = useContext(GlobalContext);
   const [teacherData, setTeacherData] = useState([]);
   const [subjectData, setSubjectData] = useState([]);
   const [edit, setEdit] = useState(false);
-
-  console.log(singleSubject);
+  const [showSelect, setShowSelect] = useState(false);
+  const [subjectValues, setSubjectValues] = useState({ id: "34ff", room: "sb11", subjectID: "", teacherID: "", position: { weekday: position.weekday - 1, col: position.col - 1 } });
 
   useEffect(() => {
     const prom: any = teachers.map((item: any) => ({ value: item.id, label: `${item.firstname} ${item.lastname}` }));
@@ -20,6 +22,15 @@ const SubjectDetail = () => {
     const prom2: any = subjects.map((item: any) => ({ value: item.id, label: `${item.name}` }));
     setSubjectData(prom2);
   }, []);
+
+  const addNewHandler = () => {
+    setShowSelect(true);
+  };
+
+  const saveNewHandler = () => {
+    console.log(subjectValues);
+    dispatch(addAttachedSubject(subjectValues));
+  };
 
   return (
     <div className="flex flex-col items-center pt-[40px]">
@@ -30,23 +41,39 @@ const SubjectDetail = () => {
           <div>{singleSubject?.teacherDetail.lastname}</div>
         </div>
       </div>
-      {edit && (
-        <div className="w-[100%]">
-          <div className="w-[70%]">
-            <Select options={subjectData} onChange={(val) => console.log(val)} />
+      {showSelect && (
+        <div className="w-[100%] flex flex-col items-center">
+          <div className="w-[70%] mb-[5px]">
+            <Select options={subjectData} placeholder="Select subject" name="subjectID" onChange={(val: any) => setSubjectValues({ ...subjectValues, subjectID: val.value })} />
           </div>
-          <div className="w-[70%]">
-            <Select options={teacherData} onChange={(val) => console.log(val)} />
+          <div className="w-[70%] mb-[5px]">
+            <Select options={teacherData} placeholder="Select teacher" name="teacherID" onChange={(val: any) => setSubjectValues({ ...subjectValues, teacherID: val.value })} />
           </div>
         </div>
       )}
-      {!edit ? (
-        <div>
-          <button onClick={() => setEdit(true)}>Upravit</button>
-          <button onClick={() => singleSubject !== null && dispatch(deleteAttachedSubject({ id: singleSubject.id, position: singleSubject.position }))}>Smazat</button>
-        </div>
+      {singleSubject !== null ? (
+        <>
+          {!edit ? (
+            <div className="flex flex-col mt-[10px]">
+              <button className="border-2 border-yellow-400 mb-[10px] px-[20px] py-[5px] hover:bg-yellow-400 hover:text-white" onClick={() => setEdit(true)}>
+                Upravit
+              </button>
+              <button className="bg-red-400 text-white hover:bg-red-500" onClick={() => singleSubject !== null && dispatch(deleteAttachedSubject({ id: singleSubject!.id, position: singleSubject!.position }))}>
+                Smazat
+              </button>
+            </div>
+          ) : (
+            <button onClick={() => setEdit(false)}>Ulozit</button>
+          )}
+        </>
+      ) : showSelect ? (
+        <button onClick={() => saveNewHandler()} className="mt-[10px] border-2 border-sky-400 mb-[10px] px-[20px] py-[5px] bg-sky-400 text-white transition ease-in-out hover:shadow-md hover:-translate-y-[2px]">
+          Save
+        </button>
       ) : (
-        <button onClick={() => setEdit(false)}>Ulozit</button>
+        <button onClick={() => addNewHandler()} className="mt-[10px] border-2 border-sky-400 mb-[10px] px-[20px] py-[5px] bg-sky-400 text-white transition ease-in-out hover:shadow-md hover:-translate-y-[2px]">
+          Add
+        </button>
       )}
     </div>
   );

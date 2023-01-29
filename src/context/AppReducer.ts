@@ -18,6 +18,20 @@ export default function appReducer(state: any, action: any) {
         singleSubject: action.payload
       };
 
+    case "ADD_ATTACHED_SUBJECT":
+      const subject = state.subjects.find((x: any) => x.id === action.payload.subjectID);
+      const teacher = state.teachers.find((x: any) => x.id === action.payload.teacherID);
+
+      let newAttachedSubject = action.payload;
+      newAttachedSubject = { ...newAttachedSubject, subjectDetail: subject, teacherDetail: teacher };
+
+      state.weekdays[action.payload.position.weekday].cols[action.payload.position.col].items = [newAttachedSubject];
+
+      return {
+        ...state,
+        attachedSubjects: [...state.attachedSubjects, action.payload]
+      };
+
     case "GET_ATTACHED_SUBJECTS":
       for (let i = 0; i < state.attachedSubjects.length; i++) {
         const subject = state.subjects.find((x: any) => x.id === state.attachedSubjects[i].subjectID);
@@ -27,8 +41,6 @@ export default function appReducer(state: any, action: any) {
         state.attachedSubjects[i].teacherDetail = teacher;
 
         state.weekdays[state.attachedSubjects[i].position.weekday].cols[state.attachedSubjects[i].position.col].items = [state.attachedSubjects[i]];
-
-        console.log(state.weekdays[state.attachedSubjects[i].position.weekday].cols[state.attachedSubjects[i].position.col].items);
       }
 
       return {
@@ -42,10 +54,10 @@ export default function appReducer(state: any, action: any) {
 
       state.weekdays[state.attachedSubjects[index].position.weekday].cols[state.attachedSubjects[index].position.col].items = [];
 
-      console.log(index);
       return {
         ...state,
-        attachedSubjects: newArr
+        attachedSubjects: newArr,
+        singleSubject: null
       };
 
     case "ADD_TEACHER":
@@ -57,13 +69,15 @@ export default function appReducer(state: any, action: any) {
     case "OPEN_MODAL":
       return {
         ...state,
-        isModalOpen: true
+        isModalOpen: true,
+        position: { weekday: action.payload.weekday, col: action.payload.col }
       };
 
     case "CLOSE_MODAL":
       return {
         ...state,
-        isModalOpen: false
+        isModalOpen: false,
+        singleSubject: null
       };
 
     default:

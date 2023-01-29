@@ -5,7 +5,7 @@ interface Props {
   data: any;
 }
 
-const DayRow = ({ data: { id, name, cols } }: Props) => {
+const DayRow = ({ data, data: { id, name, cols } }: Props) => {
   const subName = name.substring(0, 2);
   return (
     <div className="flex w-[100%] h-[20%]">

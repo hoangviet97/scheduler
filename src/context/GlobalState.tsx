@@ -30,10 +30,12 @@ const initialState = {
   ],
   attachedSubjects: [
     { id: "124", subjectID: "ek01", teacherID: "34rt53", position: { weekday: 2, col: 3 }, room: "NB101" },
+    { id: "12fre8", subjectID: "ek01", teacherID: "34rt51", position: { weekday: 1, col: 1 }, room: "NB210" },
     { id: "12fre3", subjectID: "ek01", teacherID: "34rt51", position: { weekday: 1, col: 6 }, room: "NB210" }
   ],
   singleSubject: null,
   isModalOpen: false,
+  position: { weekday: 0, col: 0 },
   weekdays: [
     {
       id: 1,

@@ -15,6 +15,11 @@ export const getSubject = (subject: ExtAttachedSubject): IAction => ({
   payload: subject
 });
 
+export const addAttachedSubject = (object: any): IAction => ({
+  type: "ADD_ATTACHED_SUBJECT",
+  payload: object
+});
+
 export const getAttachedSubject = (): IAction => ({
   type: "GET_ATTACHED_SUBJECTS"
 });
@@ -29,8 +34,9 @@ export const addTeacher = (teacher: Teacher): IAction => ({
   payload: teacher
 });
 
-export const openModal = (): IAction => ({
-  type: "OPEN_MODAL"
+export const openModal = ({ weekday, col }: { weekday: any; col: any }): IAction => ({
+  type: "OPEN_MODAL",
+  payload: { weekday, col }
 });
 
 export const closeModal = (): IAction => ({

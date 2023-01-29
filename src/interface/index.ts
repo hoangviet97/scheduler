@@ -40,10 +40,11 @@ export interface IState {
   attachedSubjects: AttachedSubject[];
   singleSubject: ExtAttachedSubject | null;
   isModalOpen: boolean;
+  position: any;
   weekdays: Weekday[];
 }
 
-export type IAction = { type: "ADD_SUBJECT"; payload: Subject } | { type: "EDIT_SUBJECT"; payload: Subject } | { type: "GET_SUBJECT"; payload: ExtAttachedSubject } | { type: "GET_ATTACHED_SUBJECTS" } | { type: "DELETE_ATTACHED_SUBJECT"; payload: any } | { type: "ADD_TEACHER"; payload: Teacher } | { type: "OPEN_MODAL" } | { type: "CLOSE_MODAL" };
+export type IAction = { type: "ADD_SUBJECT"; payload: Subject } | { type: "EDIT_SUBJECT"; payload: Subject } | { type: "GET_SUBJECT"; payload: ExtAttachedSubject } | { type: "GET_ATTACHED_SUBJECTS" } | { type: "ADD_ATTACHED_SUBJECT"; payload: any } | { type: "DELETE_ATTACHED_SUBJECT"; payload: any } | { type: "ADD_TEACHER"; payload: Teacher } | { type: "OPEN_MODAL"; payload: any } | { type: "CLOSE_MODAL" };
 
 export interface IContextModel {
   state: IState;

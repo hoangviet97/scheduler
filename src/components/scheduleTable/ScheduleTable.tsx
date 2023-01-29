@@ -20,7 +20,7 @@ const ScheduleTable = () => {
       <div className="bg-slate-200 w-[100%]">
         <div className="h-[60px] w-[calc(100% - 49px)] ml-[49px] bg-slate-200 flex">
           {timeCols.map((col: any, index: number) => (
-            <div key={index} className={`w-[10%] h-[100%] flex items-center justify-center ${index % 2 === 0 ? "bg-slate-300" : "bg-slate-600"}`}>
+            <div key={index} className={`w-[10%] h-[100%] flex items-center justify-center text-slate-200 border-r-[1px] border-b-[1px] border-slate-300 bg-slate-800`}>
               {col.id}
             </div>
           ))}
