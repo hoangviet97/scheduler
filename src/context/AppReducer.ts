@@ -7,9 +7,16 @@ export default function appReducer(state: any, action: any) {
       };
 
     case "EDIT_SUBJECT":
+      const Esubject = state.subjects.find((x: any) => x.id === action.payload.subjectID);
+      const Eteacher = state.teachers.find((x: any) => x.id === action.payload.teacherID);
+
+      let newEAttachedSubject = action.payload;
+      newEAttachedSubject = { ...newEAttachedSubject, subjectDetail: Esubject, teacherDetail: Eteacher };
+
+      state.weekdays[action.payload.position.weekday].cols[action.payload.position.col].items = [newEAttachedSubject];
+
       return {
-        ...state,
-        subjects: [...state.subject, action.payload]
+        ...state
       };
 
     case "GET_SUBJECT":

@@ -5,7 +5,7 @@ export const addSubject = (subject: Subject): IAction => ({
   payload: subject
 });
 
-export const editSubject = (subject: Subject): IAction => ({
+export const editSubject = (subject: any): IAction => ({
   type: "EDIT_SUBJECT",
   payload: subject
 });
