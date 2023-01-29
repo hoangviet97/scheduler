@@ -5,7 +5,7 @@ import { getAttachedSubject } from "../../actions/globalActions";
 
 const ScheduleTable = () => {
   const {
-    state: { weekdays, attachedSubjects },
+    state: { weekdays },
     dispatch
   } = useContext(GlobalContext);
 
@@ -13,7 +13,6 @@ const ScheduleTable = () => {
 
   useEffect(() => {
     dispatch(getAttachedSubject());
-    console.log(attachedSubjects);
   }, []);
 
   return (

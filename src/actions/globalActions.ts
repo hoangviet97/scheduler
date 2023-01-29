@@ -1,4 +1,4 @@
-import { Subject, Teacher, IAction } from "../interface/index";
+import { Subject, Teacher, ExtAttachedSubject, IAction } from "../interface/index";
 
 export const addSubject = (subject: Subject): IAction => ({
   type: "ADD_SUBJECT",
@@ -10,8 +10,18 @@ export const editSubject = (subject: Subject): IAction => ({
   payload: subject
 });
 
+export const getSubject = (subject: ExtAttachedSubject): IAction => ({
+  type: "GET_SUBJECT",
+  payload: subject
+});
+
 export const getAttachedSubject = (): IAction => ({
   type: "GET_ATTACHED_SUBJECTS"
+});
+
+export const deleteAttachedSubject = ({ id, position }: { id: any; position: any }): IAction => ({
+  type: "DELETE_ATTACHED_SUBJECT",
+  payload: { id, position }
 });
 
 export const addTeacher = (teacher: Teacher): IAction => ({

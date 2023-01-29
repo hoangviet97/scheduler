@@ -12,6 +12,16 @@ const initialState = {
       id: "1248y",
       firstname: "Sammy",
       lastname: "Rogue"
+    },
+    {
+      id: "34rt53",
+      firstname: "Adele",
+      lastname: "Niedelmai"
+    },
+    {
+      id: "34rt51",
+      firstname: "Mark",
+      lastname: "Lamile"
     }
   ],
   subjects: [
@@ -19,10 +29,10 @@ const initialState = {
     { id: "mat07", name: "Matematika", slug: "MAT" }
   ],
   attachedSubjects: [
-    { subjectID: "ek01", teacherID: "1248y", position: { weekday: 2, col: 3 }, room: "NB101" },
-    { subjectID: "ek01", teacherID: "1248y", position: { weekday: 1, col: 6 }, room: "NB210" }
+    { id: "124", subjectID: "ek01", teacherID: "34rt53", position: { weekday: 2, col: 3 }, room: "NB101" },
+    { id: "12fre3", subjectID: "ek01", teacherID: "34rt51", position: { weekday: 1, col: 6 }, room: "NB210" }
   ],
-  subjectDetail: null,
+  singleSubject: null,
   isModalOpen: false,
   weekdays: [
     {
