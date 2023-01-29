@@ -28,7 +28,6 @@ const SubjectDetail = () => {
   };
 
   const saveNewHandler = () => {
-    console.log(subjectValues);
     dispatch(addAttachedSubject(subjectValues));
   };
 
