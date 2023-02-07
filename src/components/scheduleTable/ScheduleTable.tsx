@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import DayRow from "../dayRow/DayRow";
 import { GlobalContext } from "../../context/GlobalState";
 import { getAttachedSubject } from "../../actions/globalActions";
+import { Weekday } from "../../interface/index";
 
 const ScheduleTable = () => {
   const {
@@ -27,7 +28,7 @@ const ScheduleTable = () => {
         </div>
       </div>
       <div className="w-[100%] h-[100%]">
-        {weekdays.map((item: any, index: number) => {
+        {weekdays.map((item: Weekday, index: number) => {
           return <DayRow key={index} data={item} />;
         })}
       </div>

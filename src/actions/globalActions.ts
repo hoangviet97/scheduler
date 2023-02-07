@@ -24,7 +24,7 @@ export const getAttachedSubject = (): IAction => ({
   type: "GET_ATTACHED_SUBJECTS"
 });
 
-export const deleteAttachedSubject = ({ id, position }: { id: any; position: any }): IAction => ({
+export const deleteAttachedSubject = ({ id, position }: { id: string; position: any }): IAction => ({
   type: "DELETE_ATTACHED_SUBJECT",
   payload: { id, position }
 });
@@ -34,7 +34,7 @@ export const addTeacher = (teacher: Teacher): IAction => ({
   payload: teacher
 });
 
-export const openModal = ({ weekday, col }: { weekday: any; col: any }): IAction => ({
+export const openModal = ({ weekday, col }: { weekday: number; col: number }): IAction => ({
   type: "OPEN_MODAL",
   payload: { weekday, col }
 });

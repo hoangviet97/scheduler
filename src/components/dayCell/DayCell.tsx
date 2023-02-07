@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalState";
 import { openModal } from "../../actions/globalActions";
 import SubjectCard from "../subjectCard/SubjectCard";
-import SubjectCardBox from "../subjectCardBox/SubjectCardBox";
 
 interface Props {
   id: number;

@@ -3,22 +3,23 @@ import { GlobalContext } from "../../context/GlobalState";
 import Select from "react-select";
 import { deleteAttachedSubject, addAttachedSubject, closeModal, editSubject } from "../../actions/globalActions";
 import { v4 as uuidv4 } from "uuid";
+import { Teacher, Subject } from "../../interface/index";
 
 const SubjectDetail = () => {
   const {
     state: { singleSubject, teachers, subjects, position },
     dispatch
   } = useContext(GlobalContext);
-  const [teacherData, setTeacherData] = useState([]);
-  const [subjectData, setSubjectData] = useState([]);
-  const [edit, setEdit] = useState(false);
-  const [showSelect, setShowSelect] = useState(false);
+  const [teacherData, setTeacherData] = useState<Teacher[]>([]);
+  const [subjectData, setSubjectData] = useState<Subject[]>([]);
+  const [edit, setEdit] = useState<boolean>(false);
+  const [showSelect, setShowSelect] = useState<boolean>(false);
   const [subjectValues, setSubjectValues] = useState({ id: "", room: "", subjectID: "", teacherID: "", position: { weekday: position.weekday - 1, col: position.col - 1 } });
 
   useEffect(() => {
-    const prom: any = teachers.map((item: any) => ({ value: item.id, label: `${item.firstname} ${item.lastname}` }));
+    const prom: any = teachers.map((item: Teacher) => ({ value: item.id, label: `${item.firstname} ${item.lastname}` }));
     setTeacherData(prom);
-    const prom2: any = subjects.map((item: any) => ({ value: item.id, label: `${item.name}` }));
+    const prom2: any = subjects.map((item: Subject) => ({ value: item.id, label: `${item.name}` }));
     setSubjectData(prom2);
   }, []);
 
@@ -60,7 +61,7 @@ const SubjectDetail = () => {
         {showSelect && (
           <div className="flex flex-col items-center">
             <div>Room</div>
-            <input className="px-[10px] py-[5px] mt-[5px]" onChange={(e: any) => setSubjectValues({ ...subjectValues, room: e.target.value })} placeholder="Enter any room id" />
+            <input className="px-[10px] py-[5px] mt-[5px]" onChange={(e: any) => setSubjectValues({ ...subjectValues, room: e.target.value })} placeholder="Zadejte číslo místnosti" />
           </div>
         )}
         <div className="flex justify-end">{singleSubject?.room}</div>

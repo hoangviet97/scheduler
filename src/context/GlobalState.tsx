@@ -10,18 +10,18 @@ const initialState = {
   teachers: [
     {
       id: "1248y",
-      firstname: "Sammy",
-      lastname: "Rogue"
+      firstname: "Kamila",
+      lastname: "Černá"
     },
     {
       id: "34rt53",
-      firstname: "Adele",
-      lastname: "Niedelmai"
+      firstname: "Věra",
+      lastname: "Koucná"
     },
     {
       id: "34rt51",
-      firstname: "Mark",
-      lastname: "Lamile"
+      firstname: "David",
+      lastname: "Pešek"
     }
   ],
   subjects: [
