@@ -1,4 +1,4 @@
-# scheduler
+# Simple school scheduler
 
 ## Built with
 
